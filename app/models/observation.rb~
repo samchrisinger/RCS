@@ -1,0 +1,5 @@
+class Observation < ActiveRecord::Base
+  attr_accessible :lat, :lon, :timestamp, :participants, :guardian, :rcs_test_kit_use, :photo, :metadata
+
+  has_one :User
+end
