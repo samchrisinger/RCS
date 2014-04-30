@@ -19,4 +19,4 @@
 //= require bootstrap
 //= require models
 //= require views
-
+//= require home

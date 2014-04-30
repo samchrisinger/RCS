@@ -4,8 +4,8 @@ class Code < ActiveRecord::Base
   has_one :user
   has_many :session
 
-  def valid
+  def valid?
     t = Time.now
-    :start_date < t and t < :end_date
+    start_date < t and t < end_date
   end
 end

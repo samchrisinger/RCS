@@ -71,9 +71,7 @@ $(function() {
     });
 
     Story = Backbone.Model.extend({
-	initialize: function(){
 
-	}
     });
 
     News = Backbone.Collection.extend({

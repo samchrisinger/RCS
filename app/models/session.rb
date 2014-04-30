@@ -1,5 +1,9 @@
 class Session < ActiveRecord::Base
   attr_accessible :token
   
-  belongs_one :code
+  belongs_to :code
+
+  def expired?
+    not code.valid?
+  end
 end
