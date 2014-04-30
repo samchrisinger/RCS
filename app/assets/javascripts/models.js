@@ -22,6 +22,24 @@ $(function() {
         }
     });
 
+    Users = Backbone.Collection.extend({
+	url: '/users',
+	model: User
+    });
+
+    Metric = Backbone.Model.extend({
+	url: '/metric',
+        initialize: function() {
+
+        }
+    });
+    
+    Metrics = Backbone.Collection.extend({
+	url: '/metrics',
+        model: Metric
+    });
+
+    
     Observation = Backbone.Model.extend({
 	/* Attributes
 	   ----------
@@ -39,7 +57,8 @@ $(function() {
 	defaults: {
 	    guardian: false,
 	    rcs_test_kit_use: false,
-	    participants: 1
+	    participants: 1,
+	    metrics: new Metrics()	    
 	},
         initialize: function() {
 
@@ -49,18 +68,6 @@ $(function() {
     Observations = Backbone.Collection.extend({
 	url: '/observations',
         model: Observation
-    });
-
-    Metric = Backbone.Model.extend({
-	url: '/metric',
-        initialize: function() {
-
-        }
-    });
-    
-    Metrics = Backbone.Collection.extend({
-	url: '/metrics',
-        model: Metric
     });
 
     Story = Backbone.Model.extend({

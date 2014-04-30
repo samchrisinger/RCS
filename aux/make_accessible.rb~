@@ -1,0 +1,1 @@
+MetricType.attr_accessible :min, :max, :name
