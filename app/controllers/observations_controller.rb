@@ -40,10 +40,10 @@ class ObservationsController < ApplicationController
   # POST /observations
   # POST /observations.json
   def create
-    @observation = Observation.new(params[:observation])
-
+    @observation = Observation.new(params)    
     respond_to do |format|
       if @observation.save
+        
         format.html { redirect_to @observation, notice: 'Observation was successfully created.' }
         format.json { render json: @observation, status: :created, location: @observation }
       else

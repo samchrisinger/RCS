@@ -8,10 +8,10 @@ class User < ActiveRecord::Base
   # attr_accessible :title, :body
 
   # Associations
-  has_many :Observation
-  has_many :Report
-  has_many :News
-  has_many :Code
+  has_many :observation
+  has_many :report
+  has_many :news
+  has_many :code
 
   def access_token
     token

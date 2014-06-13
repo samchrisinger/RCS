@@ -5,7 +5,7 @@ class Code < ActiveRecord::Base
   has_many :session
 
   def valid?
-    t = Time.now
+    t = Date.current
     start_date < t and t < end_date
   end
 end

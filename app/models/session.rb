@@ -5,5 +5,5 @@ class Session < ActiveRecord::Base
 
   def expired?
     not code.valid?
-  end
+  end  
 end

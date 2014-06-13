@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  skip_before_filter :has_jwt, :only=>[:mobile_login]
+  
   # GET /users
   # GET /users.json
   def index
@@ -78,6 +80,25 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to users_url }
       format.json { head :no_content }
+    end
+  end
+
+  # POST /mobile/users/sign_in
+  def mobile_login
+    email = params[:email]
+    password = params[:password]
+    if email.nil? or password.nil?
+      head :unauthorized
+    else
+      user = User.find_by_email(email)
+      if user.nil?      
+        head :unauthorized
+      elsif user.valid_password?(password)        
+        payload = {:user_id=>user.id, :chunk=>user.encrypted_password[0..4], :expires=>Date.today+30}
+        render :json=>{:token=>JWT.encode(payload, API_Keys::JWT_SECRET)}
+      else
+        head :unauthorized
+      end
     end
   end
 end

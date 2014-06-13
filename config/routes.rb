@@ -6,5 +6,7 @@ RCS::Application.routes.draw do
   resources :news, :defaults => { :format => 'json' }
   resources :observations, :defaults => { :format => 'json' }
   
+  post '/mobile/users/sign_in', to: 'users#mobile_login'
+
   root to: 'home#index'
 end

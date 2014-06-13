@@ -14,3 +14,4 @@ class MetaRecord < ActiveRecord::Base
     end
   end
 end
+
