@@ -1,5 +1,5 @@
 class Metric < ActiveRecord::Base
-  attr_accessible :value
+  attr_accessible :value, :metric_type_id
 
   validates :value, presence: true
   validates_associated :observation

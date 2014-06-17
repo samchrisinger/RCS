@@ -39,15 +39,45 @@ class ObservationsController < ApplicationController
 
   # POST /observations
   # POST /observations.json
-  def create
-    @observation = Observation.new(params)    
+  def create        
+    data = {
+      :lat=>params[:lat],
+      :lon=>params[:lon],
+      :timestamp=>params[:fimestamp],
+      :participants=>params[:participants],
+      :guardian=>@current_user.guardian,
+      :rcs_test_kit_use=>params[:rcs_test_kit_use],
+      :photo=>params[:photo],
+      :comment=>params[:comment],
+      :metadata=>params[:metadata]
+    }
+
+    @observation = Observation.new(data)
+    @observation.user_id = @current_user.id
+    saved = @observation.save
+    if saved        
+      metrics = params[:metrics]
+      unless metrics.nil?
+        metrics.each do |metric|
+          data = {
+            :metric_type_id=>metric[:metric_type_id],
+            :value=>metric[:value]
+          }
+          @metric = Metric.new(data)
+          @metric.observation_id = @observation.id
+          if !@metric.save
+            logger.info metric+" failed to save"
+          end
+        end
+      end
+    end
+
     respond_to do |format|
-      if @observation.save
-        
+      if saved 
         format.html { redirect_to @observation, notice: 'Observation was successfully created.' }
         format.json { render json: @observation, status: :created, location: @observation }
       else
-        format.html { render action: "new" }
+        format.html { render action: 'new' }
         format.json { render json: @observation.errors, status: :unprocessable_entity }
       end
     end

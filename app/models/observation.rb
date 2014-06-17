@@ -1,7 +1,6 @@
 require 'meta.rb'
 
 class Observation < MetaRecord
-  before_save :defaults
 
   attr_accessible :user_id, :lat, :lon, :timestamp, :participants, :guardian, :rcs_test_kit_use, :photo, :comment, :metrics # inherits :metadata from MetaRecord
 
@@ -9,12 +8,6 @@ class Observation < MetaRecord
 
   has_many :metrics
 
-  # inherits instance method meta(data) from MetaRecord
-  
-  def defaults
-    self.participants = 1
-    self.guardian = false
-    self.rcs_test_kit_use = false
-  end
+  # inherits instance method meta(data) from MetaRecord  
 end
 
