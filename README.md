@@ -51,6 +51,7 @@ cancel_user_registration GET    /users/cancel(.:format)           devise/registr
     mobile_users_sign_in POST   /mobile/users/sign_in(.:format)   users#mobile_login
                     root        /                                 home#index
 ```
+# API
 
 ## Token based-auth
 
@@ -67,3 +68,32 @@ And get some data with:
 curl -H 'Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOadadi1NiJ9dW5rIjoiJDJhJDEiLCJleHBpcmVzIjoiMjAxNC0wNy0xNiJ9.QeASp4BN6yuAzFEosl1LaWTYYyaVY2CHWETKyxtcJAQ' http://localhost:3000/observations
 > [{"comment":"Testing this comment.Testing this comment.Testing this comment.Testing this comment.Testing this comment.Testing this comment.","created_at":"2014-04-29T23:54:42Z","guardian":true,"id":1,"lat":8.28834,"lon":35.5464,"metadata":null,"participants":1,"photo":"http://lorempixel.com/400/200/","rcs_test_kit_use":true,"timestamp":"2014-04-30T14:41:46Z","updated_at":"2014-04-29T23:54:42Z","user_id":41},{"comment":null,"created_at":"2014-04-29T23:55:22Z","guardian":true,"id":2,"lat":7.37095,"lon":-97.0159,"metadata":null,"participants":1,"photo":"http://lorempixel.com/400/200/","rcs_test_kit_use":true,"timestamp":"2014-04-30T14:41:46Z","updated_at":"2014-04-29T23:55:22Z","user_id":1},{"comment":null,"created_at":"2014-04-29T23:56:13Z","guardian":true,"id":3,"lat":-22.1038,"lon":-19.4191,"metadata":null,"participants":2,"photo":"http://lorempixel.com/400/200/","rcs_test_kit_use":true,"timestamp":"2014-04-30T14:41:46Z","updated_at":"2014-04-29T23:56:13Z","user_id":60},...]
 ```
+
+## Adding observations
+
+POST: /observations
+
+You JSON payload should look something like:
+
+```
+{
+    "lat": float,
+    "lon": float,
+    "timestamp": timestamp,
+    "participants": int,
+    "rcs_test_kit_use": bool,
+    "photo": string,
+    "comment": text,
+    "metadata": text,
+    "metrics": [
+        {
+            "metric_type_id": int foreignkey,
+            "value": float
+        }
+    ]
+}
+```
+
+where metrics is an array of N metrics.
+
+__For now photo uploads are unsupported, but are coming soon__
