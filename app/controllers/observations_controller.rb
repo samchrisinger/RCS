@@ -1,4 +1,6 @@
 class ObservationsController < ApplicationController
+  skip_before_filter :ensure_auth, :only=>[:index, :show]
+  
   # GET /observations
   # GET /observations.json
   def index

@@ -42,3 +42,5 @@ gem 'mysql2'
 gem 'json'
 gem 'rake'
 gem 'jwt'
+
+gem 'debugger'

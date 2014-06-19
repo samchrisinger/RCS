@@ -1,4 +1,6 @@
 class MetricTypesController < ApplicationController
+  skip_before_filter :ensure_auth, :only=>[:index, :show]
+
   # GET /metric_types
   # GET /metric_types.json
   def index

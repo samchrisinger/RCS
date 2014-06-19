@@ -71,7 +71,13 @@ curl -H 'Authorization: JWT eyJ0eXAiOiJKV1QiLCJhbGciOadadi1NiJ9dW5rIjoiJDJhJDEiL
 
 ## Adding observations
 
-POST: /observations
+First you'll need to fetch the current list of available metric_types. These are subject to change and should not be cached. This list can be fetched like:
+
+```
+curl http://localhost:3000/metric_types
+```
+
+Now you can POST to /observations, remembering to set you Authorization header with your API token.
 
 You JSON payload should look something like:
 
