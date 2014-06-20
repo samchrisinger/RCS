@@ -12,10 +12,6 @@ class User < ActiveRecord::Base
   has_many :report
   has_many :news
   has_many :code
-
-  def access_token
-    token
-  end
   
   def name
     first_name + " " + last_name

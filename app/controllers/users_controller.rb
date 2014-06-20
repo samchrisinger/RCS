@@ -94,11 +94,32 @@ class UsersController < ApplicationController
       if user.nil?      
         head :unauthorized
       elsif user.valid_password?(password)        
-        payload = {:user_id=>user.id, :chunk=>user.encrypted_password[0..4], :expires=>Date.today+30}
-        render :json=>{:token=>JWT.encode(payload, API_Keys::JWT_SECRET)}
+        payload = {:typr=>'permenant', :user_id=>user.id, :chunk=>user.encrypted_password[0..4], :expires=>Date.today+30}
+        render :json=>{:token=>JWT.encode(payload, API_Keys::JWT_SECRET), :user=>user}
       else
         head :unauthorized
       end
     end
+  end
+
+  def code_login
+    key = params[:code]
+    if key.nil?
+      head :unauthorized
+    else
+      code = Code.where(:value=>key)[0]
+      if code.nil?
+        render json:{:error=>'Bad code, please double check that you typed it correctly'}
+        return
+      else
+        unless code.expired?
+          payload = {:type=>'temporary', :authorizer=>code.user_id, :expires=>code.end_date}
+        render :json=>{:token=>JWT.encode(payload, API_Keys::JWT_SECRET), :user=>user}
+          return
+        end
+        render json: {:eeror=>'That code is expired'}
+        return
+      end
+    end    
   end
 end

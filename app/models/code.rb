@@ -4,8 +4,8 @@ class Code < ActiveRecord::Base
   has_one :user
   has_many :session
 
-  def valid?
+  def expired?
     t = Date.current
-    start_date < t and t < end_date
+    return not(start_date < t and t < end_date)
   end
 end
