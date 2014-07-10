@@ -2,8 +2,13 @@ class MetricsController < ApplicationController
   # GET /metrics
   # GET /metrics.json
   def index
-    @metrics = Metric.all
-
+    @metrics = []
+    if not params[:observation_id].nil?      
+      @metrics = Metric.where(:observation_id=>params[:observation_id])
+    else
+      @metrics = Metric.all
+    end
+      
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @metrics }

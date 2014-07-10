@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
     token = auth.split('JWT ').pop()
     payload = nil
     begin          
-      payload = JWT.decode(token, API_Keys::JWT_SECRET)[0]     
+      payload = JWT.decode(token, JWT_SECRET)[0]     
     rescue
       render json: {:error=>'Bad token, please get a new one'}, status: 400
       return

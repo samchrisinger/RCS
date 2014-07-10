@@ -83,8 +83,8 @@ class UsersController < ApplicationController
     end
   end
 
-  # POST /mobile/users/sign_in
-  def mobile_login
+  # POST /users/login
+  def token_login
     email = params[:email]
     password = params[:password]
     if email.nil? or password.nil?
@@ -94,8 +94,8 @@ class UsersController < ApplicationController
       if user.nil?      
         head :unauthorized
       elsif user.valid_password?(password)        
-        payload = {:typr=>'permenant', :user_id=>user.id, :chunk=>user.encrypted_password[0..4], :expires=>Date.today+30}
-        render :json=>{:token=>JWT.encode(payload, API_Keys::JWT_SECRET), :user=>user}
+        payload = {:type=>'permenant', :user_id=>user.id, :chunk=>user.encrypted_password[0..4], :expires=>Date.today+30}
+        render :json=>{:token=>JWT.encode(payload, JWT_SECRET), :user=>user}
       else
         head :unauthorized
       end
@@ -114,7 +114,7 @@ class UsersController < ApplicationController
       else
         unless code.expired?
           payload = {:type=>'temporary', :authorizer=>code.user_id, :expires=>code.end_date}
-        render :json=>{:token=>JWT.encode(payload, API_Keys::JWT_SECRET), :user=>user}
+        render :json=>{:token=>JWT.encode(payload, JWT_SECRET), :user=>user}
           return
         end
         render json: {:eeror=>'That code is expired'}

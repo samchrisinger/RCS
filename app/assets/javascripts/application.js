@@ -12,11 +12,18 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require underscore
-//= require json2
-//= require backbone
-//= require handlebars-v1.3.0
+//= require jquery-ui.min
 //= require bootstrap
-//= require models
-//= require views
-//= require home
+//= require underscore-min.js
+//= require angular.min
+//= require ui-bootstrap-tpls-0.11.0.min
+//= require angular-resource.min
+//= require angular-route.min
+//= require moment.min
+//= require angular-moment.min
+//= require ng-map.min
+//= require app.js
+//= require_tree ./models
+//= require_tree ./controllers
+//= require angular-rails-templates
+//= require_tree ./templates

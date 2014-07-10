@@ -4,7 +4,15 @@ class ObservationsController < ApplicationController
   # GET /observations
   # GET /observations.json
   def index
-    @observations = Observation.all
+    # TODO not the most efficent way, but works
+    @observations = Observation.where(true)
+    if not params[:user_id].nil?
+      @observations = @observations.where(:user_id=>params[:user_id])
+    end
+    if not params[:page].nil?
+      offset = (params[:page].to_i-1)*100
+      @observations = Observation.limit(100).offset(offset)
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,10 +24,14 @@ class ObservationsController < ApplicationController
   # GET /observations/1.json
   def show
     @observation = Observation.find(params[:id])
-
+    
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @observation }
+      if params[:with_metrics].nil?      
+        format.json { render json: @observation }
+      else
+        format.json { render json: @observation.as_json({:with_metrics=>params[:with_metrics]}) }
+      end
     end
   end
 
@@ -49,7 +61,7 @@ class ObservationsController < ApplicationController
       :participants=>params[:participants],
       :guardian=>@current_user.guardian,
       :rcs_test_kit_use=>params[:rcs_test_kit_use],
-      :photo=>params[:photo],
+      :photo_id=>params[:photo_id],
       :comment=>params[:comment],
       :metadata=>params[:metadata]
     }

@@ -7,6 +7,13 @@ class Metric < ActiveRecord::Base
   has_one :observation
 
   def type
-    return Metric_type.find(:metric_type_id)
+    return MetricType.find(metric_type_id)
+  end
+
+  def as_json(options=nil)
+    return {
+      :type=>type,
+      :value=>value
+    }
   end
 end

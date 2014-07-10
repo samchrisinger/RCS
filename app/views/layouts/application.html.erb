@@ -3,6 +3,7 @@
 
 <head>
     <title>RCS</title>
+    <%= yield :js_extras %>
     <%= stylesheet_link_tag "application", :media=>"all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
@@ -17,16 +18,10 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Cabin+Condensed:600' rel='stylesheet' type='text/css'>
 </head>
-<body>
-  <div id="loginBox">
-       <% if user_signed_in? %>
-       <span id="loginMsg"> Logged in as <strong><%= current_user.name %></strong>.</span>&#160;&#160;&#160;&#160;
-       <button id="signOutButton" type="button" class="btn btn-success navbar-btn">Sign out</button>
-       <% end %>
-       <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
- </div>
+<body> 
 
   <%= yield %>
 
