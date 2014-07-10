@@ -1,0 +1,209 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+body {} 
+#app {
+    font-family: 'Cabin Condensed', sans-serif !important;
+}
+#loginBox {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    width: auto;
+}
+#navigation {
+    position: relative;
+    left: -55px;
+}
+#content {
+    height: 400px;
+    padding: 20px;    
+}
+#newsfeed {
+    position: relative;
+    top: 50px;
+}
+#newsFeedControl {} #newsfeedLoader {
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: gray;
+    opacity: 0.6;
+    vertical-align: middle;
+}
+#newsfeedToggle {
+    position: absolute;
+    left: -15px;
+    top: 0;
+    bottom: 0;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    width: 22px;
+    background: rgb(89, 106, 114);
+    background: -moz-linear-gradient(left, rgba(89, 106, 114, 1) 1%, rgba(206, 220, 231, 1) 100%);
+    background: -webkit-gradient(linear, left top, right top, color-stop(1%, rgba(89, 106, 114, 1)), color-stop(100%, rgba(206, 220, 231, 1)));
+    background: -webkit-linear-gradient(left, rgba(89, 106, 114, 1) 1%, rgba(206, 220, 231, 1) 100%);
+    background: -o-linear-gradient(left, rgba(89, 106, 114, 1) 1%, rgba(206, 220, 231, 1) 100%);
+    background: -ms-linear-gradient(left, rgba(89, 106, 114, 1) 1%, rgba(206, 220, 231, 1) 100%);
+    background: linear-gradient(to right, rgba(89, 106, 114, 1) 1%, rgba(206, 220, 231, 1) 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#596a72', endColorstr='#cedce7', GradientType=1);
+}
+#observationsLoader {
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: gray;
+    opacity: 0.6;
+    vertical-align: middle;
+}
+.media-body {} .truncated {
+    white-space: nowrap;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 25px;
+}
+.observationComment {
+    overflow: hidden;
+}
+#newsfeedControl {
+    margin-top: 30px;
+}
+#observationsTitle {
+    float: left;
+}
+#gmapsContainer,
+#gmapsCanvas {
+    height: 300px;
+}
+#metricsTable {
+    height: auto;
+    max-height: 250px;
+    overflow: scroll;
+}
+.jumbotron {
+    height: 450px;
+}
+.spin {
+    -webkit-animation: spin 2s infinite linear;
+    -moz-animation: spin 2s infinite linear;
+    -o-animation: spin 2s infinite linear;
+    animation: spin 2s infinite linear;
+    -webkit-transform-origin: 50% 58%;
+    transform-origin: 50% 58%;
+    -ms-transform-origin: 50% 58%;
+    /* IE 9 */
+}
+@-moz-keyframes spin {
+    from {
+        -moz-transform: rotate(0deg);
+    }
+    to {
+        -moz-transform: rotate(360deg);
+    }
+}
+@-webkit-keyframes spin {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+.userBtn {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+#navBar {} 
+.navBtn {
+    margin: 2px;
+    border: 1px solid;
+}
+#userNav {
+    float: right;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
+}
+#sidebar-right {
+    float: right;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+#logo {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    height: 80px;
+}
+#banner {
+    width: 100%;
+    height: 100px;
+    background: #eeeeee;
+    background: -moz-radial-gradient(center, ellipse cover, #eeeeee 0%, #cccccc 100%);
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #eeeeee), color-stop(100%, #cccccc));
+    background: -webkit-radial-gradient(center, ellipse cover, #eeeeee 0%, #cccccc 100%);
+    background: -o-radial-gradient(center, ellipse cover, #eeeeee 0%, #cccccc 100%);
+    background: -ms-radial-gradient(center, ellipse cover, #eeeeee 0%, #cccccc 100%);
+    background: radial-gradient(ellipse at center, #eeeeee 0%, #cccccc 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr='#eeeeee', endColorstr='#cccccc', GradientType=1);
+}
+#title {
+    font-size: 50px;
+    position: absolute;
+    top: 15px;
+    left: 120px;
+}
+#data{
+    height: 200px;
+    width: 100%;
+}
+#dataTable{
+    overflow: scroll;
+    height: 200px;
+}
+#dataCtrl{
+    position: relative;
+    top: -20px;
+}
+#dataCtrlFwd{
+    float:right;
+    margin-right: 20%;
+}
+#dataCtrlBkwd{
+    float:left;
+    margin-left: 20%;
+}
+#dataCtrlShow{
+    position: relative;
+    left: 15%;    
+}
+#observationMetricsTable{
+    width:200px;
+    height: 200px;
+}
+.observationImage{
+    margin: 0 auto;
+    height: auto;
+    width: auto;
+    margin-left: 5%;
+    max-height: 300px;
+    max-width: 450px;
+}
+.angular-google-map-container{
+    height: 350px;
+    width: 400px;
+    position: absolute;
+    right: 140px;
+    top: 120px;
+}

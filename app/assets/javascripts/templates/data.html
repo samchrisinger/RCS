@@ -1,0 +1,92 @@
+<div id="data" ng-controller="DataCtrl">
+  <table class="table" id="dataTable">
+    <thead>
+      <tr>
+        <th>
+	  #
+	</th>
+	<th>
+	  Date
+	</th>
+	<th>
+	  Observer
+	</th>
+	<th>
+	  Coordinates
+	</th>
+	<th>
+	  Metrics
+	</th>
+	<th>
+	  Guardian?
+	</th>
+	<th>
+	  Participants
+	</th>
+	<th>
+	  Photo
+	</th>
+	<th>
+	  Actions
+	</th>
+      </tr>
+    </thead>
+    <tbody>      
+      <tr ng-repeat="observation in observations.slice((page-1)*20, page*20)">
+	<td ng-class="{success: observation.guardian, default: !observation.guardian}">
+	  {{observation.id}}
+	</td>
+	<td ng-class="{success: observation.guardian, default: !observation.guardian}">
+	  {{observation.timestamp}}
+	</td>
+	<td ng-class="{success: observation.guardian, default: !observation.guardian}">
+	  {{observation.observer.first_name[0]}}. {{observation.observer.last_name}}
+	</td>
+	<td ng-class="{success: observation.guardian, default: !observation.guardian}">
+	  ({{observation.lat}}, {{observation.lon}})
+	</td>
+	<td ng-class="{success: observation.guardian, default: !observation.guardian}">
+	  {{observation.metrics_count}}
+	</td>	
+	<td ng-class="{success: observation.guardian, default: !observation.guardian}">
+	  {{observation.guardian?'Yes':'No' }}
+	</td>
+	<td ng-class="{success: observation.guardian, default: !observation.guardian}">
+	  {{observation.participants}}
+	</td>
+	<td ng-class="{success: observation.guardian, default: !observation.guardian}">
+	  <a ng-if="observation.photo_id" class="btn btn-primary" href="#photos/{{observation.photo_id}}">
+	    <span class="glyphicon glyphicon-camera">	      	      
+	    </span>
+	  </a>
+	</td>
+	<td ng-class="{success: observation.guardian, default: !observation.guardian}">
+	  <a class="btn btn-primary" href="#observations/{{observation.id}}">
+	    <span class="glyphicon glyphicon-info-sign"></span>
+	    View
+	  </a>
+	</td>
+      </tr>
+    </tbody>
+  </table>
+  <div id="dataCtrl">
+    <div id="dataCtrlBkwd">
+      <a ng-class="{disabled: page == 1}" 
+	 class="btn glyphicon glyphicon-fast-backward"
+	 ng-click="page = 1">Start</a>
+      <a ng-class="{disabled: page == 1}" 
+	 class="btn glyphicon glyphicon-arrow-left"
+	 ng-click="page = max(1, page - 1)">Prev.</a>
+    </div>
+    <span id="dataCtrlShow" class="">Showing results {{((page*20)-20)+1}} to {{min(observations.length,(page*20)+20)}}</span>
+    <div id="dataCtrlFwd">
+      <a ng-class="{disabled: stop == observations.length}"
+	 class="btn glyphicon glyphicon-arrow-right"
+	 ng-click="page = page + 1">Next</a>
+      <a ng-class="{disabled: ((page+1*20) > observations.length)}" 
+	 class="btn glyphicon glyphicon-fast-forward"
+	 ng-click="page = observations.length/20">End</a>
+    </div>
+  </div>
+</div>
+

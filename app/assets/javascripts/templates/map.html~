@@ -1,0 +1,5 @@
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<google-map draggable="true" refresh="$root.map.visible" center="$root.map.center" zoom="$root.map.zoom">
+  <markers fit="true" model="root.map.markers"></markers>
+</google-map>
+    

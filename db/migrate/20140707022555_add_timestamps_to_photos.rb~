@@ -1,0 +1,4 @@
+class AddTimestampsToPhotos < ActiveRecord::Migration
+  def change
+  end
+end
