@@ -10,6 +10,16 @@ class Observation < MetaRecord
   # inherits instance method meta(data) from MetaRecord  
 
   def as_json(options=nil)
+    photo_url = nil
+    begin
+      o_photo = Photo.find(photo_id)
+      if not o_photo.nil?
+        photo_url = o_photo.photo.url
+      end
+    rescue
+      p 'no photo'
+    end
+
     ret = {
       :observer=>User.find(user_id),
       :id=>id,
@@ -20,7 +30,7 @@ class Observation < MetaRecord
       :guardian=>guardian,
       :rcs_test_kit_use=>rcs_test_kit_use,
       :photo_id=>photo_id,
-      :photo_url=>Photo.find(photo_id).photo.url,
+      :photo_url=>photo_url,
       :comment=>comment,
       :metadata=>metadata,
       :metrics_count=>metrics.length

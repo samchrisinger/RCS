@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_filter :ensure_auth, :only=>[:mobile_login]
+  skip_before_filter :ensure_auth, :only=>[:token_login]
   
   # GET /users
   # GET /users.json

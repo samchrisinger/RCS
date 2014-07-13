@@ -1,12 +1,19 @@
 class ApplicationController < ActionController::Base
   before_filter :ensure_auth
-  
+  before_filter :set_access
+
+  def set_access
+    headers["Access-Control-Allow-Origin"] = '*'    
+    headers['Access-Control-Allow-Methods'] = 'POST, GET, PUT, DELETE'
+    headers['Access-Control-Allow-Headers'] = 'Origin, X-RequestedWith, Content-Type, Accept, Authorization'
+    headers['Access-Control-Max-Age'] = '604800'
+  end
+
   def ensure_auth
     auth = request.headers['HTTP_AUTHORIZATION']   
     if auth.nil?
       authenticate_user!
     else
-      has_token = auth.split('JWT ').length > 0
       authenticate_user_with_jwt!
     end
   end
@@ -56,7 +63,7 @@ class ApplicationController < ActionController::Base
       exp = Date.parse(payload['expires'])
       today = Date.current
       if exp < today
-        render json: {:error=>'Your token is expired, please get a new one'}, sttaus: 401
+        render json: {:error=>'Your token is expired, please get a new one'}, status: 401
         return
       end
       @current_user = user
