@@ -1,8 +1,0 @@
-app.factory('Metric', ['$resource', function($resource){
-    return $resource(
-	'/metrics_type/:id',
-	null,
-	{'get': {isArray: true}}
-    );
-}])
-;

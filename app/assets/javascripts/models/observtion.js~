@@ -1,8 +1,0 @@
-angular.module('app')
-    .provider('Observation', function(){
-	this.$get = ['$resource', function($resource) {
-	    var User = $resource('/users/:uid', {}, {});
-	    
-	    return User;
-	}];
-    });
