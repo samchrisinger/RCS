@@ -1,3 +1,4 @@
 class MetricType < ActiveRecord::Base
-  attr_accessible :name, :description, :min, :max
+  self.inheritance_column = :_type_disabled
+  attr_accessible :name, :description, :min, :max, :type
 end

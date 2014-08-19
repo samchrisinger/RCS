@@ -29,3 +29,6 @@ config/enviornments/production.rb
 .rvmrc
 
 Gemfile.lock
+
+\#*
+*~

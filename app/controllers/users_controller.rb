@@ -1,5 +1,11 @@
 class UsersController < ApplicationController
   skip_before_filter :ensure_auth, :only=>[:token_login]
+
+  def ensure_admin 
+    if not current_user.admin
+      return 
+    end    
+  end
   
   # GET /users
   # GET /users.json
@@ -42,8 +48,27 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new(params[:user])
+    email = params[:email]
+    if email.nil?
+      return 422
+    end
+    if User.where(:email=>email).count() > 0
+      return render json: {:message=>"A user with that email address already exists"}
+    end
 
+    attrs = {
+      :first_name=>params[:first_name] || '',
+      :last_name=>params[:last_name] || '',
+      :email=>params[:email],
+      :guardian=>params[:guardian] || false,
+      :admin=>params[:admin] || false,
+      :metadata=>{
+        :phone=>params[:phone]
+      }.to_json,
+      :password=>SecureRandom.hex(8)
+    }    
+    @user = User.new(attrs)
+    
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }

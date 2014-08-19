@@ -1,7 +1,0 @@
-class Report < ActiveRecord::Base
-  attr_accessible :lat, :lon, :message, :photo, :metadata
-  
-  def type
-    return Report_type.find(:report_type_id)
-  end   
-end

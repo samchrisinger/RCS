@@ -14,7 +14,7 @@
 //= require jquery_ujs
 //= require jquery-ui.min
 //= require bootstrap
-//= require underscore-min.js
+//= require bootbox.min
 //= require angular.min
 //= require ui-bootstrap-tpls-0.11.0.min
 //= require angular-resource.min
@@ -23,6 +23,9 @@
 //= require angular-moment.min
 //= require ng-map.min
 //= require app.js
+//= require_tree ./directives
+//= require_tree ./services
+//= require_tree ./filters
 //= require_tree ./models
 //= require_tree ./controllers
 //= require angular-rails-templates

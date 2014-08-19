@@ -1,5 +1,8 @@
 app.controller('DataCtrl', ['$scope', '$rootScope', 'Observation',
     function($scope, $rootScope, Observation){
+	// TODO showme
+	$scope.hidden = true;
+
 	$scope.min = Math.min;
 	$scope.max = Math.max;
 	$scope.floor = Math.floor;
