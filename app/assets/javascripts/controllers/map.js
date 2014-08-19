@@ -23,6 +23,37 @@ app.controller('mapCtrl', function($scope){
 	$scope.map.setCenter(latlng);
 	google.maps.event.trigger($scope.map, 'resize');	
     };
+    $scope.locator = null;
+    $scope.locate = function(listener){
+	if($scope.locator){
+	    $scope.locator.marker.setMap(null);
+	    $scope.locator.circle.setMap(null);
+	}
+	else
+	    $scope.locator = {};
+	$scope.locator.marker = new google.maps.Marker({
+	    map: $scope.map,
+	    draggable: true,
+	    position: $scope.map.getCenter()
+	});
+	$scope.locator.circle = new google.maps.Circle({
+	    radius: 50,
+	    center: $scope.map.getCenter(),
+	    fillColor: 'blue',
+	    fillOpacity: 0.1,
+	    strokeOpacity: 0,
+	    map: $scope.map
+	});
+	google.maps.event.addListener($scope.locator.marker,'drag',function(event) {
+	    var coords = {
+		lat: event.latLng.lat(),
+		lng: event.latLng.lng()
+	    };
+	    $scope.locator.circle.setCenter(coords);
+	    listener(coords);
+	});
+    };
+
     $scope.$on('mapChange', function(evt, data){
 	$scope.setMarkers(data);
     });
@@ -36,4 +67,7 @@ app.controller('mapCtrl', function($scope){
 	    clearMarkers();
 	}
     });    
+    $scope.$on('locate', function(evt, listener){
+	$scope.locate(listener);
+    });
 });

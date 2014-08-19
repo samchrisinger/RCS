@@ -20,7 +20,7 @@ module HomeHelper
                         :children=>[
                                     {
                                       :link=>'Add Users',
-                                      :href=>'/#users/new'
+                                      :href=>'/#user/new'
                                     }
                                    ]
                       },

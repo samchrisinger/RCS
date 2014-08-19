@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140707022555) do
+ActiveRecord::Schema.define(:version => 20140811144039) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "namespace"
@@ -55,8 +55,14 @@ ActiveRecord::Schema.define(:version => 20140707022555) do
     t.datetime "updated_at", :null => false
   end
 
+  create_table "hourly_weather", :force => true do |t|
+    t.string "datestring"
+    t.string "locationstring"
+  end
+
   create_table "metric_types", :force => true do |t|
     t.string   "name"
+    t.string   "type"
     t.text     "description"
     t.float    "min"
     t.float    "max"
@@ -67,7 +73,7 @@ ActiveRecord::Schema.define(:version => 20140707022555) do
   create_table "metrics", :force => true do |t|
     t.integer  "observation_id"
     t.integer  "metric_type_id"
-    t.float    "value"
+    t.string   "value"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
   end
@@ -120,6 +126,12 @@ ActiveRecord::Schema.define(:version => 20140707022555) do
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
     t.integer  "photo_id"
+  end
+
+  create_table "summary_weather", :force => true do |t|
+    t.string "datestring"
+    t.string "locationstring"
+    t.text   "summary"
   end
 
   create_table "tokens", :force => true do |t|

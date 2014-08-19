@@ -1,0 +1,69 @@
+<div class="col-md-6">
+    <div class="col-md-6">
+      <span class="observationLabel">
+	<h3>
+	  <em>New</em> observation by {{current_user.first_name[0]}}. {{current.last_name}}
+	</h3>
+      </span>
+      <p class="input-group">
+	<label>Around</label>
+	<timepicker ng-model="observation.timestamp" minute-step="1"></timepicker>
+      </p>          
+      <label>On</label>
+      <p class="input-group">
+	<datepicker      
+	   ng-model="observation.timestamp" 
+	   is-open="{{$parent.dp.opened}}"
+	   max-date="dp.maxDate"
+	   min-date="dp.minDate"	  
+	   max-mode="day"
+	   format-day-title="MMMM d, yyyy"
+	   >
+	</datepicker>
+      </p>        
+    </div>
+</div>
+<div class="col-md-6">
+        <table class="table col-md-4" id="observationMetricsTable">
+            <thead>
+                <tr>
+                    <th>
+                        Type
+                    </th>
+                    <th>
+                        Value
+                    </th>
+		    <th>
+		    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="metric in observation.metrics">
+                  <td>
+		     <span class="dropdown" on-toggle="toggled(open)">
+		       <span class="dropdown-toggle">
+			 {{metric.type.name}}
+		       </span>
+		       <ul class="dropdown-menu">
+			 <li ng-repeat="mt in $parent.metric_types">
+			   <a ng-click="metric.type=mt">{{mt.name}}</a>
+			 </li>
+		       </ul>
+		     </span>
+                  </td>
+                  <td>
+                    <input type="text" ng-model="metric.value"></input>
+                  </td>
+		  <th>
+		      <a class="btn glyphicon glyphicon-plus-sign"
+			 ng-click="$parent.observation.add()"
+			 ng-hide="$index>0"></a>
+		      <a class="btn glyphicon glyphicon-minus-sign"
+			 ng-click="$parent.observation.remove($index)"
+			 ng-hide="$index==0"></a>				      
+		  </th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

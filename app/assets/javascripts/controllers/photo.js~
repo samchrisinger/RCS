@@ -1,8 +1,0 @@
-app.controller('PhotoCtrl', ['$scope', '$rootScope', '$routeParams', 'Photo', function($scope, $rootScope, $routeParams, Photo){       
-    $scope.current_user = $rootScope.current_user;
-    $rootScope.map.visible = true;
-    $scope.photo = {};
-    Photo.query(function(photos){
-	$scope.photos = photos;
-    });    
-}]);
