@@ -1,4 +1,6 @@
 RCS::Application.routes.draw do  
+  match '*path', :controller => 'application', :action => 'handle_options_request', :constraints => {:method => 'OPTIONS'}
+
   devise_for :users do post '/users' => 'users#create' end 
   
   resources :users, :defaults => { :format => 'json' }
