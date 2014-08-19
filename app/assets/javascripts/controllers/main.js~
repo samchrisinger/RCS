@@ -1,0 +1,11 @@
+app.controller('MainCtrl', ['$scope', '$rootScope',
+			    function($scope, $rootScope){
+				$rootScope.current_user = current_user;
+				$scope.target = 'home';
+
+				$rootScope.$on('contentChange', function(evt, target){
+				    $scope.target = target;
+				});
+			    }]
+	      );
+

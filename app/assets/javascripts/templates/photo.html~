@@ -1,0 +1,10 @@
+<div ng-controller="PhotoCtrl">
+  <div style="height: 360px; width: 550px">
+    <carousel>
+      <slide ng-repeat="photo in photos">	     
+        <img ng-src="{{photo.url}}" style="margin:auto;">
+        </div>
+      </slide>
+    </carousel>
+  </div>
+</div>

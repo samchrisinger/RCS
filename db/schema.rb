@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140612001939) do
+ActiveRecord::Schema.define(:version => 20140707022555) do
 
   create_table "codes", :force => true do |t|
     t.integer  "user_id"
@@ -56,11 +56,16 @@ ActiveRecord::Schema.define(:version => 20140612001939) do
     t.integer  "participants"
     t.boolean  "guardian"
     t.boolean  "rcs_test_kit_use"
-    t.string   "photo"
     t.text     "metadata"
     t.datetime "created_at",       :null => false
     t.datetime "updated_at",       :null => false
     t.text     "comment"
+    t.integer  "photo_id"
+  end
+
+  create_table "photos", :force => true do |t|
+    t.string   "photo"
+    t.datetime "created_at"
   end
 
   create_table "report_types", :force => true do |t|
@@ -81,6 +86,7 @@ ActiveRecord::Schema.define(:version => 20140612001939) do
     t.text     "metadata"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.integer  "photo_id"
   end
 
   create_table "sessions", :force => true do |t|
