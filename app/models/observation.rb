@@ -13,12 +13,6 @@ class Observation < MetaRecord
     photo_url = nil
     begin
       o_photo = Photo.find(photo_id)
-<<<<<<< HEAD
-      photo_url =  o_photo.photo.url
-    rescue      
-    end
-   
-=======
       if not o_photo.nil?
         photo_url = o_photo.photo.url
       end
@@ -26,7 +20,6 @@ class Observation < MetaRecord
       p 'no photo'
     end
 
->>>>>>> 42fbcc89cc5f5b1e0755e87d0a7d41f27ea205fc
     ret = {
       :observer=>User.find(user_id),
       :id=>id,
