@@ -3,7 +3,7 @@ app.controller('ObservationCtrl', ['$scope', '$rootScope', '$routeParams', 'Obse
     $scope.STF = JSON.stringify;
     ////
     $scope.current_user = $rootScope.current_user;    
-    $scope.observation = {metrics: {}};
+    $scope.observation = {observer: current_user, metrics: {}};
     $scope.metric_types = [];
     MetricType.query(function(mts){
 	$scope.metric_types = mts;
@@ -12,11 +12,12 @@ app.controller('ObservationCtrl', ['$scope', '$rootScope', '$routeParams', 'Obse
 	});
     });
     $rootScope.$broadcast('toggleMap', true);
-    if(Object.keys($routeParams).length == 0){
+    if(Object.keys($routeParams).length == 0){       
 	$scope.template = 'guardian';
 	// TODO restrict by user type
 	$scope.templates = ['guardian', 'steward']; 
 	$scope.observation.metadata = {
+	    observers: [(current_user.first_name+' '+current_user.last_name)],
 	    bacteria: [
 		{
 		    type: 'water_temperature',

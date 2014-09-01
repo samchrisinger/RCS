@@ -1,37 +1,102 @@
-<div class="form">
+<div class="form" ng-init="observation.metadata.schema_type='guardian'" style="padding=10px; padding-bottom:30px;">
   <div class="form-group">
     <label>      
+      River Steward Name{{'s' ? observation.metadata.observers.length > 1 : ''}}: &nbsp;&nbsp;
     </label>
-    <input />
+    <span ng-repeat="observer in observation.metadata.observers">
+    <input type="text" ng-model="observer" />
+    </span>
+  </div>
+  <div class="form-group">
+    <label>     
+      River Section Monitored:    &nbsp;&nbsp;
+    </label>
+    <input ng-model="observation.metadata.section"/>
   </div>
   <div class="form-group">
     <label>      
+      Date: &nbsp;&nbsp;
     </label>
-    <input />
+    <input date class="datepicker" ng-model="observation.timestamp" />
+    &nbsp;&nbsp;&nbsp;
+    <label>    
+      Time:  &nbsp;&nbsp;
+    </label>
+    <input time class="datepicker" ng-model="observation.timestamp" />
   </div>
   <div class="form-group">
     <label>      
+      Weather: &nbsp;&nbsp;
     </label>
-    <input />
+    <input ng-model="observation.metadata.weather"/>
+    &nbsp;&nbsp;&nbsp;
+    <label>      
+      Recent Precipitation: &nbsp;&nbsp;
+    </label>
+    <input ng-model="observation.metadata.recent_precipitation"/>
+  </div>
+  <h4> Chemical Monitoring </h4>
+  <div class="form-group">
+    <label>      
+      Description of testing site: &nbsp;&nbsp;
+    </label>
+    <input ng-model="observation.metadata.chemical.site_description"/>
   </div>
   <div class="form-group">
     <label>      
+      Did you monitor with the RCS provided kit? &nbsp;&nbsp;
     </label>
-    <input />
+    <select ng-model="observation.rcs_test_kit_use">
+      <option value="true">
+	Yes
+      </option>
+      <option value="false">
+	No
+      </option>	    
+    </select>
   </div>
+  <div ng-repeat="group in metric_types | partition:2">
+    <div class="form-group">
+      <span ng-repeat="mt in group">
+	<label>      
+	  {{ mt.name.charAt(0).toUpperCase() + mt.name.slice(1) }}: &nbsp;&nbsp;
+	</label>
+	<input ng-model="$scope.observation.metrics[mt.id].value"/>
+	&nbsp;&nbsp;&nbsp;
+      </span>
+    </div>
+  </div>
+  <h4> Bacteria Monitoring </h4>
   <div class="form-group">
     <label>      
+      Description of testing site: 
     </label>
-    <input />
+    <input ng-model="observation.metadata.chemical.site_description"/>
+  </div>  
+  <div ng-repeat="group in observation.metadata.bacteria | partition:2">
+    <div class="form-group">
+      <span ng-repeat="mt in group">
+	<label>
+	  {{ mt.label }}:&nbsp;&nbsp;
+	</label>
+	<input ng-model="observation.metadata.bacteria[$index].value"/>
+	&nbsp;&nbsp;&nbsp;
+      </span>
+    </div>
   </div>
   <div class="form-group">
-    <label>      
-    </label>
-    <input />
-  </div>
-  <div class="form-group">
-    <label>      
-    </label>
-    <input />
+    <label style="width:500px;">      
+      Notes: (Provide any relevant information on wildlife and plant sightings (including invasives), human interactions (approx. number using the river), pollution and litter, erosion, debris blocking the River, land use in the area, notable historic/cultural structures or geologic outcrops and any actions needed). Please provide GPS (lat./long.) for locations if possible. Alternatively, drag the red marker on the right to the approximate location of your observations. 
+    </label><br />
+    <textarea ng-model="observation.metadata.notes" style="width:500px; height:250px;"> 
+    </textarea>
+    <div class="form-group">
+      <label>Latitude:	&nbsp;&nbsp; </label>
+      <input ng-model="observation.lat" ng-change="observation.updateCoordinates()" />
+      &nbsp;&nbsp;&nbsp;
+      <label>Longitude:	&nbsp;&nbsp;</label>
+      <input ng-model="observation.lon" ng-change="observation.updateCoordinates()" />
+    </div>
   </div>
 </div>
+
