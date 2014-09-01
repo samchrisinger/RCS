@@ -1,12 +1,16 @@
 module HomeHelper
+  <<-DOC
+     ... Add this back in when ready
+     {
+      :link=>'View Data',
+      :href=>'/#obseravtions'
+    },     
+  DOC
+
   def nav_bar
     options = [{
                  :link=>'Home',
                  :href=>'/#'
-               },
-               {
-                 :link=>'View Data',
-                 :href=>'/#obseravtions'
                },
                {
                  :link=>'Add Data',
