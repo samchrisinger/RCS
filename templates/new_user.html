@@ -1,0 +1,51 @@
+<div>
+    <h3>Add a new user</h3>
+    <div class="form">
+        <div class="form-group">
+            <label>
+                First name: 
+            </label>
+            <input ng-model="new_user.first_name" ng-required/>
+        </div>
+        <div class="form-group">
+            <label>
+                Last name: 
+            </label>
+            <input ng-model="new_user.last_name" ng-required/>
+        </div>
+        <div class="form-group">
+            <label>
+                Email address: 
+            </label>
+            <input ng-model="new_user.email" ng-required/>
+        </div>
+        <div class="form-group">
+            <label>
+                Phone number: 
+            </label>
+            <input ng-model="new_user.metadata.phone" />
+        </div>
+        <div class="form-group">
+            <label>
+                River Guardian?: 
+            </label>
+            <select value="false" ng-model="new_user.guardian">
+                <option value="false">No</option>
+                <option value="true">Yes</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>
+                Administrator: 
+            </label>
+            <select value="false" ng-model="new_user.admin">
+                <option value="false">No</option>
+                <option value="true">Yes</option>
+            </select>
+        </div>
+    </div>
+    <button class="btn btn-primary"
+	    ng-click="register()">
+      Register
+    </button>
+</div>

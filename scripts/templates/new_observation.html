@@ -1,0 +1,18 @@
+<p>
+  <label>Template:&nbsp;&nbsp;</label>
+  <select 
+     ng-model="template"
+     ng-options="o as o for o in templates">
+  </select>
+</p>
+<div ng-switch on="template">
+  <div ng-switch-when="basic">
+    <ng-include src="'forms/basic.html'"></ng-include>
+  </div>
+  <div ng-switch-when="guardian">
+    <ng-include src="'forms/guardian.html'"></ng-include>
+  </div>
+  <div ng-switch-when="steward">
+    <ng-include src="'forms/steward.html'"></ng-include>
+  </div>
+</div>

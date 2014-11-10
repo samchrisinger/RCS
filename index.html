@@ -1,0 +1,74 @@
+<Html>
+<head>
+<!-- Stylesheets -->
+<link rel="stylesheet" type="text/css" href="styles/leaflet.css">
+<link rel="stylesheet" type="text/css" href="styles/home.css">
+
+<!-- bower:css -->
+<!-- endbower -->
+
+<!-- Javascripts -->  
+
+<!-- bower:js -->
+<!-- endbower -->
+<!--
+<script src="scripts/bootbox.min.js"></script>        
+<script src="scripts/bootstrap-paginator.min.js"></script>            
+<script src="scripts/angular.min.js"></script>
+<script src="scripts/ui-bootstrap-tpls-0.11.0.min.js"></script>              
+<script src="scripts/leaflet.js"></script>  
+<script src="scripts/angular-leaflet-directive.min.js"></script>   
+<script src="scripts/moment.min.js"></script>   
+<script src="scripts/angular-moment.min.js"></script>               
+<script src="scripts/angular-resource.min.js"></script>            
+<script src="scripts/angular-route.min.js"></script>               
+
+<script src="scripts/app.js"></script>  
+<script src="scripts/settings.js"></script>  
+<script src="scripts/config.js"></script>       
+
+<script src="scripts/directives/date.js"></script>
+<script src="scripts/directives/time.js"></script>
+
+<script src="scripts/filters/correct.js"></script>
+<script src="scripts/filters/date.js"></script>
+<script src="scripts/filters/partition.js"></script>
+                   
+<script src="scripts/models/app.js"></script>
+<script src="scripts/models/user.js"></script>
+<script src="scripts/models/chemical_report.js"></script>
+<script src="scripts/models/bacteria_report.js"></script>
+<script src="scripts/models/report.js"></script>
+
+<script src="scripts/controllers/user.js"></script>
+<script src="scripts/controllers/report.js"></script>
+<script src="scripts/controllers/login.js"></script>
+-->
+</head>
+<body>
+<div ng-app="app" id="app">
+  <div id="banner">
+    <img id="logo" src="/images/logo.jpg"></img>
+    <img id="ekg" src="/images/ekg.png"></img>
+    <span id="title">RCS River Monitor</span>
+    <div id="userNav">
+      <div ng-if="$root.user">
+	<h4>signed in as {{$root.user.name}}</h4>
+	<span style="float:right">
+	   <a href="#profile" class="glyphicon glyphicon-cog userBtn"></a>
+	   <a href="#logout"  class="glyphicon glyphicon-log-out userBtn"></a>	     
+	</span>
+      </div>
+    </div>        
+  </div>
+  <div id="sidebar-right" ng-if="$root.user">
+    <a class="navBtn btn" href="#/report/new">Add Data</a>
+  </div>
+  <div id="content">
+    <span ng-view></span>
+    <ng-include src="'map.html'"></ng-include>
+  </div>
+  <ng-include src="'data.html'"></ng-include>
+</div>
+</body>
+</html>

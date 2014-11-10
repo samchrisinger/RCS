@@ -1,6 +1,0 @@
-class AddPhotoToObs < ActiveRecord::Migration
-  def change
-    remove_column :obseravtions, :photo
-    add_column :obseravtions, :photo_id, :integer   
-  end
-end
