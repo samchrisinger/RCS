@@ -6,7 +6,6 @@
 
 <!-- bower:css -->
 <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
-<link rel="stylesheet" href="bower_components/leaflet/dist/leaflet.css" />
 <!-- endbower -->
 
 <!-- Javascripts -->  
@@ -18,14 +17,18 @@
 <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
 <script src="bower_components/angular-resource/angular-resource.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
-<script src="bower_components/moment/moment.js"></script>
-<script src="bower_components/angular-moment/angular-moment.js"></script>
-<script src="bower_components/bootbox/bootbox.js"></script>
-<script src="bower_components/leaflet/dist/leaflet.js"></script>
-<script src="bower_components/leaflet/dist/leaflet-src.js"></script>
-<script src="bower_components/angular-leaflet-directive/dist/angular-leaflet-directive.js"></script>
 <!-- endbower -->
-
+<!--
+<script src="scripts/bootbox.min.js"></script>        
+<script src="scripts/bootstrap-paginator.min.js"></script>            
+<script src="scripts/angular.min.js"></script>
+<script src="scripts/ui-bootstrap-tpls-0.11.0.min.js"></script>              
+<script src="scripts/leaflet.js"></script>  
+<script src="scripts/angular-leaflet-directive.min.js"></script>   
+<script src="scripts/moment.min.js"></script>   
+<script src="scripts/angular-moment.min.js"></script>               
+<script src="scripts/angular-resource.min.js"></script>            
+<script src="scripts/angular-route.min.js"></script>               
 
 <script src="scripts/app.js"></script>  
 <script src="scripts/settings.js"></script>  
@@ -47,7 +50,7 @@
 <script src="scripts/controllers/user.js"></script>
 <script src="scripts/controllers/report.js"></script>
 <script src="scripts/controllers/login.js"></script>
-
+-->
 </head>
 <body>
 <div ng-app="app" id="app">
@@ -70,8 +73,9 @@
   </div>
   <div id="content">
     <span ng-view></span>
+    <ng-include src="'map.html'"></ng-include>
   </div>
-  <!--<ng-include src="'templates/data.html'"></ng-include>-->
+  <ng-include src="'data.html'"></ng-include>
 </div>
 </body>
 </html>

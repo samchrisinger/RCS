@@ -1,16 +1,15 @@
 var gulp = require('gulp');
 
-var wiredep = require('wiredep').stream;
+var wiredep = require('wiredep');
 
 gulp.task('default', function(){
 
 });
 
-gulp.task('bower', function () {
-  gulp.src('index.html')
-    .pipe(wiredep({
-      optional: 'configuration',
-      goes: 'here'
-    }))
-    .pipe(gulp.dest('index.html'));
+gulp.task('bower', function () {    
+    wiredep({
+	directory: 'bower_components',
+	src: './index.html',
+	bowerJson: require('./bower.json')
+    });
 });

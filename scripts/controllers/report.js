@@ -1,6 +1,6 @@
-app.controller('ReportCtrl', ['$scope', '$rootScope', '$routeParams', '$http', '$location', 'Types', 'User', 'Report', 'ChemicalReport', 'BacteriaReport',
+app.controller('ReportCtrl', ['$scope', '$rootScope', '$routeParams', '$http', '$location', 'User', 'Report', 'ChemicalReport', 'BacteriaReport',
     function($scope, $rootScope, $routeParams, $http, $location,
-        Types, User, Report, ChemicalReport, BacteriaReport) {
+        User, Report, ChemicalReport, BacteriaReport) {
 
 	// LEAFLET
 	angular.extend($scope, {
