@@ -4,16 +4,23 @@ app.controller('ObservationCtrl', ['$scope', '$rootScope', '$routeParams', 'Obse
     ////
     $scope.current_user = $rootScope.current_user;    
     $scope.observation = {observer: current_user, metrics: {}};
-    $scope.metric_types = [];
+    $scope.metric_types = [];    
     MetricType.query(function(mts){
 	$scope.metric_types = mts;
 	mts.filter(function(mt){
-	    $scope.observation.metrics[mt.id] = {id:mt.id,value:null};
+	    $scope.observation.metrics[mt.id] = {id: mt.id, 
+						 value: null};
 	});
     });
+    $scope.getMetric = function(name){
+	var found = $scope.metric_types.filter(function(mt){
+	    return mt.name == name;
+	});
+	return found[0].id;
+    };
     $rootScope.$broadcast('toggleMap', true);
     if(Object.keys($routeParams).length == 0){       
-	$scope.template = 'guardian';
+	$scope.template = 'steward';
 	// TODO restrict by user type
 	$scope.templates = ['guardian', 'steward']; 
 	$scope.observation.metadata = {

@@ -1,28 +1,47 @@
 <div class="form" ng-init="observation.metadata.schema_type='guardian'" style="padding=10px; padding-bottom:30px;">
   <div class="form-group">
     <label>      
-      River Steward Name{{'s' ? observation.metadata.observers.length > 1 : ''}}: &nbsp;&nbsp;
+      River Steward Name{{observation.metadata.observers.length > 1 ? 's' : ''}}: &nbsp;&nbsp;
     </label>
-    <span ng-repeat="observer in observation.metadata.observers">
-    <input type="text" ng-model="observer" />
+    <span ng-repeat="observer in observation.metadata.observers track by $index">
+      <p>
+	<input type="text" 
+	       ng-model="observation.metadata.observers[$index]" /> 
+	<button ng-if="!$first" 
+		ng-click="observation.metadata.observers.splice($index, 1)">
+	  Remove
+	</button>
+      </p>      
     </span>
-  </div>
-  <div class="form-group">
-    <label>     
-      River Section Monitored:    &nbsp;&nbsp;
-    </label>
-    <input ng-model="observation.metadata.section"/>
+    <button ng-click="observation.metadata.observers.push('')">Add another</button>
   </div>
   <div class="form-group">
     <label>      
       Date: &nbsp;&nbsp;
     </label>
     <input date class="datepicker" ng-model="observation.timestamp" />
-    &nbsp;&nbsp;&nbsp;
-    <label>    
-      Time:  &nbsp;&nbsp;
+  </div>
+  <div class="form-group">
+    <label>     
+      Starting location:    &nbsp;&nbsp;      
     </label>
-    <input time class="datepicker" ng-model="observation.timestamp" />
+    <input ng-model="observation.metadata.starting_location"/>    
+    &nbsp;&nbsp;
+    <label>
+      Starting time:     &nbsp;&nbsp;
+    </label>
+    <input ng-model="observation.metadata.starting_time">
+  </div>
+  <div class="form-group">
+    <label>     
+      Ending location:    &nbsp;&nbsp;      
+    </label>
+    <input ng-model="observation.metadata.ending_location"/>    
+    &nbsp;&nbsp;
+    <label>
+      Ending time:     &nbsp;&nbsp;
+    </label>
+    <input ng-model="observation.metadata.ending_time">
   </div>
   <div class="form-group">
     <label>      
@@ -35,6 +54,40 @@
     </label>
     <input ng-model="observation.metadata.recent_precipitation"/>
   </div>
+  <div class="form-group">
+    <label>      
+      Water Flow: &nbsp;&nbsp;
+    </label>
+    <input ng-model="observation.metadata.water_flow"/>
+    &nbsp;&nbsp;&nbsp;
+    <label>      
+      Water Color: &nbsp;&nbsp;
+    </label>
+    <input ng-model="observation.metadata.water_color"/>
+    &nbsp;&nbsp;&nbsp;
+    <label>      
+      Water Odor: &nbsp;&nbsp;
+    </label>
+    <input ng-model="observation.metadata.water_odor"/>
+  </div>
+  <div class="form-group">
+    <label>      
+      DO: &nbsp;&nbsp;
+    </label>
+    <input ng-model="observation.metrics[getMetric('dissolved oxygen (ppm)')]"/>
+    &nbsp;&nbsp;&nbsp;
+    <label>      
+      Water Color: &nbsp;&nbsp;
+    </label>
+    <input ng-model="observation.metadata.water_color"/>
+    &nbsp;&nbsp;&nbsp;
+    <label>      
+      Water Odor: &nbsp;&nbsp;
+    </label>
+    <input ng-model="observation.metadata.water_odor"/>
+  </div>
+
+
   <h4> Chemical Monitoring </h4>
   <div class="form-group">
     <label>      

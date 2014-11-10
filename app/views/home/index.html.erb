@@ -1,26 +1,20 @@
-<% content_for :js_extras do %>
-  <%= javascript_include_tag "https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyDUmNVzyefOsHmU0VM8ZHMDTKMwkaJKWnA" %>
-<% end %>
-<div ng-app="rcsApp" id="app">
+<div ng-app="app" id="app">
   <div id="banner">
     <img id="logo" src="/assets/logo.jpg"></img>
     <img id="ekg" src="/assets/ekg.png"></img>
     <span id="title">RCS River Monitor</span>
     <div id="userNav">
-      <% if user_signed_in? %>
-      <script type="text/javascript">
-	var current_user = <%= raw(current_user.to_json) %>
-      </script>
       <div ng-controller="UserCtrl">
-	<h4>Hello {{user.first_name}}</h4>
-	<a href="#profile" class="glyphicon glyphicon-cog userBtn"></a>
-	<%= link_to('', destroy_user_session_path, :method => :delete, :class=> 'glyphicon glyphicon-log-out userBtn') %>    
+	<h4>signed in as {{user.name}}</h4>
+	<span style="float:right">
+	   <a href="#profile" class="glyphicon glyphicon-cog userBtn"></a>
+	   <%= link_to('', destroy_user_session_path, :method => :delete, :class=> 'glyphicon glyphicon-log-out userBtn') %>    
+	</span>
       </div>
-      <% end %>  
     </div>        
   </div>
   <div id="sidebar-right">
-    <%= nav_bar %>
+    <a class="navBtn btn" href="#/report/new">Add Data</a>
   </div>
   <div id="content">
     <span ng-view></span>

@@ -1,6 +1,10 @@
-app.controller('UserCtrl', ['$scope', '$rootScope', '$routeParams', 'User',
-    function($scope, $rootScope, $routeParams, User){
-	$scope.user = current_user;
+app.controller('UserCtrl', ['$scope', '$rootScope', '$routeParams', '$location', 'User',
+    function($scope, $rootScope, $routeParams, $location, User){
+	$scope.user = {};
+	$rootScope.$watch('current_user', function(newval){
+	    $scope.user = newval;
+	});
+
 	if (!$routeParams.length) { // new user
 	    $scope.new_user = new User();
 	    $scope.new_user.metadata = {phone:''};

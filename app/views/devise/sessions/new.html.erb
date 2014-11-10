@@ -3,16 +3,20 @@
   text-align: center;
   }
   #signIn{
+  position: relative; 
+  top: 100px;
   width: 50%;
   margin: 0px auto;
   text-align: center;
   padding: 15px;
-  
-  }
+  background-color: grey;
+  }  
 </style>
-
-<h2>Sign in</h2>
-
+<div id="signIn">
+  <h1> Sign in powered by <img src="https://app.commonscloud.org/images/logo-CommonsCloud-white@2x.png"></img> </h1>
+  <a class="btn btn-primary button" href="//api.commonscloud.org/oauth/authorize?response_type=token&client_id=PGvNp0niToyRspXaaqx3PiQBMn66QXyAq5yrNHpz&redirect_uri=http%3A%2F%2F127.0.0.1%3A9000%2Fauthorize&scope=user applications">Sign in</a>
+</div>
+<!--
 <div id="signIn">
 <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
   <div><%= f.label :email %><br />
@@ -30,3 +34,4 @@
 
 <%= render "devise/shared/links" %>
 </div>
+-->

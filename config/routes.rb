@@ -15,5 +15,7 @@ RCS::Application.routes.draw do
 
   get '/weather', to: 'weather#proxy', :defaults => {:format => 'json'}
 
+  get '/authorize', to: 'home#commons'
+
   root to: 'home#index'
 end

@@ -154,6 +154,7 @@ body {}
     left: 90px;
 }
 #banner {
+    z-index: 100;
     width: 100%;
     height: 100px;
     position: fixed;
@@ -234,3 +235,4 @@ body {}
     top: 120px;
 }
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+.fg { display:inline;}

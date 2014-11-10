@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  skip_before_filter :ensure_auth, :only=>[:token_login]
+  skip_before_filter :ensure_auth, :only=>[:token_login,:commons]
 
   def ensure_admin 
     if not current_user.admin
@@ -142,9 +142,10 @@ class UsersController < ApplicationController
         render :json=>{:token=>JWT.encode(payload, JWT_SECRET), :user=>user}
           return
         end
-        render json: {:eeror=>'That code is expired'}
+        render json: {:error=>'That code is expired'}
         return
       end
     end    
   end
+
 end
