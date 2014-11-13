@@ -1,3 +1,5 @@
+# Warning: this app is very much a work in progress
+
 # What is this?
  A data collection webapp built for the Rivanna Conservation Society
 
@@ -5,7 +7,7 @@
 - built on top of the CommonsCloud API (https://github.com/CommonsCloud/CommonsCloudAPI), this provides:
   - user managment
   - data backend
-- use AngluarJS frontend framework
+- uses AngluarJS frontend framework
 
 
 # To run the app:
