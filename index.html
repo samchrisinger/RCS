@@ -70,9 +70,9 @@
 	</span>
       </div>
       <br />
-      <div id="sidebar-right" ng-if="$root.user">
+      <div id="navigation" ng-if="$root.user">
 	<a ng-class="{'active': $root.isActive('/home')}" class="btn-lg btn-default" href="#/home">Home</a>
-	<a ng-class="{'active': $root.isActive('/report')}" class="btn-lg btn-default" href="#/report">View Data</a>
+	<a ng-class="{'active': $root.isActive('/reports')}" class="btn-lg btn-default" href="#/reports">View Data</a>
 	<a ng-class="{'active': $root.isActive('/report/new')}" class="btn-lg btn-default" href="#/report/new">Add Data</a>
       </div>      
     </div>        

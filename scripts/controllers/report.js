@@ -20,17 +20,22 @@ app.controller('ReportCtrl', ['$scope', '$rootScope', '$routeParams', '$http', '
 
         // new report
         if (Object.keys($routeParams).length == 0) {
+	    var lat = 38.0279630;
+	    var lon = -78.4592056;
+	    
 	    // LEAFLET
 	    $scope.markers = {
 		main: {
-		    lat: 38.0279630,
-		    lng: -78.4592056,
+		    lat: lat,
+		    lng: lon,
                     draggable: true
                 }
 	    };
 	    var markerMoved = function(){
 		$scope.center.lat = $scope.markers.main.lat;
 		$scope.center.lng = $scope.markers.main.lng;
+		$scope.report.lat = $scope.center.lat;
+		$scope.report.lon = $scope.center.lng;
 	    };
 	    $scope.$watch('markers.main.lng', markerMoved);
 	    $scope.$watch('markers.main.lat', markerMoved);
@@ -51,8 +56,8 @@ app.controller('ReportCtrl', ['$scope', '$rootScope', '$routeParams', '$http', '
 
             R.weather = '';
             R.recent_precipitation = '';
-            R.lat = '';
-            R.lon = '';
+            R.lat = lat;
+            R.lon = lon;
             R.notes = '';
             // Chemical
             R.chemical_report = new ChemicalReport();
@@ -72,7 +77,7 @@ app.controller('ReportCtrl', ['$scope', '$rootScope', '$routeParams', '$http', '
 			    R.save({
 				cid: cres.data.resource_id,
 				bid: bres.data.resource_id
-			    }).then(function(res){
+			    }, $rootScope.user.id).then(function(res){
 				$rootScope.messages.push({
 				    type: 'success',
 				    msg: 'Your report was saved successfully'
@@ -105,7 +110,14 @@ app.controller('ReportCtrl', ['$scope', '$rootScope', '$routeParams', '$http', '
 	    Report.prototype.getOne(id).then(function(report){
 		$scope.report = report;
 		if(report.geometry){
-		    //configure map
+		    $scope.center.lat = report.lat;
+		    $scope.center.lng = report.lng;		    
+		    $scope.markers = {
+			main: {
+			    lat: report.lat,
+			    lng: report.lng,
+			}
+		    };
 		}		
 	    });
 	    

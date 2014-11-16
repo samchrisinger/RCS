@@ -3,6 +3,11 @@ app.factory('Report', ['$resource', '$http', 'settings', 'Types', 'ChemicalRepor
     var res = $resource(URL);
     var R = function(data){
 	angular.extend(this, data);
+
+	if(data.geometry){
+	    this.lat = data.geometry.geometries[0].coordinates[0];
+	    this.lng = data.geometry.geometries[0].coordinates[1];
+	}
     };
 
     var br_id = settings.SCHEMA['Report']['Bacteria Report'].id;
@@ -23,16 +28,16 @@ app.factory('Report', ['$resource', '$http', 'settings', 'Types', 'ChemicalRepor
 	}
 	if(data.lat || data.lon){
 	    data.geometry = JSON.stringify({
-	      geometries: [
+		"geometries": [
 		    {
-			coordinates: [
+			"coordinates": [
 			    parseFloat(data.lat),
 			    parseFloat(data.lon)
 			],
-			type: "Point"
+			"type": "Point"
 		    }
 		],
-		type: "GeometryCollection"
+		"type": "GeometryCollection"
 	    });
 	    delete data.lat;
 	    delete data.lon;
@@ -41,13 +46,19 @@ app.factory('Report', ['$resource', '$http', 'settings', 'Types', 'ChemicalRepor
     };
 
     
-    R.prototype.save = function(ids){	
+    R.prototype.save = function(ids, uid){		
 	var data = serialize.call(this, ids);
+	data.author_id = uid;
 	return $http.post(URL+'.json', data);
     };
        
     R.prototype.get = function(){
-	return $http.get(URL+'.json');
+	return $http.get(URL+'.json').then(function(res){
+	    return res.data.response.features.map(function(r){
+		var ret = new R(r);
+		return ret;
+	    });
+	});
     };
 
     R.prototype.getOne = function(id){

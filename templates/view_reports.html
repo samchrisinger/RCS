@@ -1,0 +1,39 @@
+<div class="row" id="reportsMap">
+  <center>
+    <leaflet defaults="defaults" markers="markers" center="center" height="480px" width="1200px"></leaflet>
+  </center>
+</div>
+<div class="row">
+  <table class="table">
+    <thead>
+      <th>
+	date
+      </th>
+      <th>
+	time
+      </th>
+      <th>
+	user_id 
+      </th>
+      <th>
+	detail view
+      </th>
+    </thead>
+    <tbody>
+      <tr ng-repeat="report in reports">
+	<td>
+	  {{report.date}}
+	</td>
+	<td>
+	  {{report.time}}
+	</td>
+	<td>
+	  {{report.author_id}}
+	</td>
+	<td>
+	  <a class="btn glyphicon glyphicon-search" href="#/report/{{report.id}}"></a>
+	</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -251,6 +251,15 @@ body {}
 }
 
 .overlayActive{
-    background-color: rgba(231,231,231,0.3)
-    
+    background-color: rgba(231,231,231,0.3)    
+}
+
+#reportsMap {
+   margin-right: auto;
+   margin-left: auto;
+}
+
+#navigation {
+    position: relative;
+    top: 14px;
 }
