@@ -57,112 +57,28 @@ app.controller('ReportCtrl', ['$scope', '$rootScope', '$routeParams', '$http', '
             // Chemical
             R.chemical_report = new ChemicalReport();
             var CR = R.chemical_report;
-            // defaults
-            CR.description_of_testing_site = {
-                label: 'Description of testing site',
-                value: '',
-                type: 'string'
-            };
-            CR['used_rcs_test_kit?'] = {
-                label: 'Used RCS test kit?',
-                type: 'bool',
-                value: false
-            };
-            CR.water_temperature = {
-                label: 'Water temperature',
-                value: null,
-                type: 'number'
-            };
-            CR.air_temperature = {
-                label: 'Air temperature',
-                value: null,
-                type: 'number'
-            };
-            CR.dissolved_oxygen = {
-                label: 'Dissolved oxygen',
-                value: null,
-                type: 'number'
-            };
-            CR.pH = {
-                label: 'pH',
-                value: null,
-                type: 'number'
-            };
-            CR.turbidity = {
-                label: 'Turbidity',
-                value: null,
-                type: 'number'
-            };
-            CR.river_flow = {
-                label: 'River flow',
-                value: '',
-                type: 'string'
-            };
-            CR.water_color = {
-                label: 'Water color',
-                value: '',
-                type: 'string'
-            };
-            CR.water_odor = {
-                label: 'Water odor',
-                value: '',
-                type: 'string'
-            };
+	    $scope.cr_keys = Object.keys(CR);
             // Bacteria
             R.bacteria_report = new BacteriaReport();
             var BR = R.bacteria_report;
-            // defaults
-            BR.description_of_testing_site = {
-                label: 'Description of testing site',
-                value: '',
-                type: 'string'
-            };
-            BR.water_temperature = {
-                label: 'Water temperature',
-                value: null,
-                type: 'number'
-            };
-            BR.air_temperature = {
-                label: 'Air temperature',
-                value: null,
-                type: 'number'
-            };
-            BR.water_color = {
-                label: 'Water color',
-                value: '',
-                type: 'string'
-            };
-            BR.water_odor = {
-                label: 'Water odor',
-                value: '',
-                type: 'string'
-            };
-            BR.colonies_river_left = {
-                label: 'Colonies - river left',
-                value: null,
-                type: 'number'
-            };
-            BR.colonies_river_right = {
-                label: 'Colonies - river right',
-                value: null,
-                type: 'number'
-            };
-            BR.river_flow = {
-                label: 'River flow',
-                value: null,
-                type: 'number'
-            };
+	    $scope.br_keys = Object.keys(BR);
+	    $scope.has_bacteria = true;
 
-            $scope.submit = function() {
+            $scope.submit = function() {		
 		CR.save().then(function(cres){
 		    var hasBR = false;
-		    if($scope.template === 'guardian'){
+		    if($scope.template === 'guardian' && $scope.has_bacteria){
 			BR.save().then(function(bres){			    
 			    R.save({
 				cid: cres.data.resource_id,
 				bid: bres.data.resource_id
+			    }).then(function(res){
+				$rootScope.messages.push({
+				    type: 'success',
+				    msg: 'Your report was saved successfully'
+				});
+				$location.path('/report/'+res.data.resource_id);
 			    });
-
 			});
 		    }
 		    else{
@@ -170,19 +86,37 @@ app.controller('ReportCtrl', ['$scope', '$rootScope', '$routeParams', '$http', '
 			    cid: cres.data.resource_id,
 			    bid: null
 			}).then(function(res){
-			    debugger;
-			}, function(err){
-			    debugger;
+			    $rootScope.messages.push({
+				type: 'success',
+				msg: 'Your report was saved successfully'
+			    });			    
+			    $location.path('/report/'+res.data.resource_id);
 			});
 		    }
 		}, function(err){
-		    debugger;
+		    console.log(error);
 		});
             };
         }
         // view report
         else {
+	    var id = $routeParams.id;
+	    $scope.report = {};
+	    Report.prototype.getOne(id).then(function(report){
+		$scope.report = report;
+		if(report.geometry){
+		    //configure map
+		}		
+	    });
 	    
+	    $scope.submit = function(){
+		$scope.report.update().then(function(){
+		    $rootScope.messages.push({
+			type: 'success',
+			msg: 'Your report was saved successfully'
+		    });			    		    
+		});
+	    };
         }
     }
 ]);

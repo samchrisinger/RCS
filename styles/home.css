@@ -85,10 +85,6 @@ body {}
 #observationsTitle {
     float: left;
 }
-#gmapsContainer,
-#gmapsCanvas {
-    height: 300px;
-}
 #metricsTable {
     height: auto;
     max-height: 250px;
@@ -237,12 +233,24 @@ body {}
     max-height: 300px;
     max-width: 450px;
 }
-#map{
-    height: 350px;
-    width: 400px;
-    position: absolute;
-    right: 140px;
-    top: 120px;
+#mapdiv{
+    position: fixed;
+    top: 180px;
+    right: 80px;    
 }
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 .fg { display:inline;}
+
+.text{
+}
+.number{
+    width: 100px;
+}
+#greeting{
+    font-size: 18px;
+}
+
+.overlayActive{
+    background-color: rgba(231,231,231,0.3)
+    
+}

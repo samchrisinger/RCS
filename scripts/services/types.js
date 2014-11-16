@@ -17,24 +17,38 @@ app.factory('Types', function(){
     };
 
     return {
-	'String': validator(function(value){
+	'string': validator(function(value){
 	    return value.toString();
 	}),
-	'Number': function(value){
+	'number': function(value){
 	    var t = parseInt(value);
 	    if (isNaN(t)){
 		t = -1;
 	    }
 	    return t;
 	},
-	'Date': function(value){
+	'date': function(value){
 	    return (new Date(value)).toLocaleDateString();
 	},		
-	'Time': function(value){
+	'time': function(value){
 	    return (new Date(value)).toTimeString().split(' ')[0];
 	},
-	'DateTime': function(value){
+	'dateTime': function(value){
 	    return (new Date(value)).toLocaleDateString() + ' ' + (new Date(value)).toTimeString().split(' ')[0];
+	},
+	'bool': function(value){
+	    if (typeof value === 'boolean'){
+		return value;
+	    }
+	    else if(value === 'true' || value === 'false'){
+		if (value === 'true'){
+		    return true;
+		}
+		else{
+		    return false;
+		}
+	    }
+	    return false;
 	}
     };
 });

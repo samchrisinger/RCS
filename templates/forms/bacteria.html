@@ -1,13 +1,16 @@
-<h4> Bacterial Monitoring </h4>
-<div class="fg-p">
-<div class="fg" ng-repeat="(key, value) in report.bacteria_report">
+<h4> Bacterial Monitoring <input type="checkbox" ng-model="has_bacteria" value="true"/></h4> 
+<div class="overlay">
+<div class="fg-p" disable-if="{{!has_bacteria}}">
+  <div class="fg" ng-repeat="key in report.bacteria_report.keys">
+    <let var="value" eq="{{report.bacteria_report[key]}}"/>
+			   
   <label>      
     {{ key | correctify }}: &nbsp;&nbsp;
   </label>
   <ng-switch on="value.type">	  	 
-    <input ng-switch-when="string" ng-model="value.value" />
-    <input ng-switch-when="number" ng-model="value.value" />
-    <select ng-switch-when="bool" ng-model="value.value" >
+    <input class="text" ng-switch-when="text" type="value.type" ng-model="value.value" />
+    <input class="number" ng-switch-when="number" type="value.type" ng-model="value.value" />
+    <select ng-switch-when="bool"  type="value.type" ng-model="value.value" >
       <option value="true">yes</option>
       <option value="false">no</option>
       <select/>
@@ -15,4 +18,5 @@
   &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
   <br style="clear:both" ng-if="$even" />
   <br style="clear:both" ng-if="$even" />
+</div>
 </div>

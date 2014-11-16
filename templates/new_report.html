@@ -18,15 +18,23 @@
     <input ng-model="report.time" ng-change="report.updateTime()"/>
   </div>  
   <div class="form-group">
-    <label>      
+    <label >      
       Weather:      &nbsp;&nbsp;
     </label>
-    <input ng-model="report.weather" />
-          &nbsp;&nbsp;&nbsp;      
-    <label>      
+    <select ng-model="report.weather" 
+	    ng-options="cond for cond in ['sunny',
+			'partly cloudy',
+			'overcast',
+			'light rain',
+			'rain',
+			'heavy rain']" 
+	    />
+            &nbsp;&nbsp;&nbsp;      
+    <label popover="{{$root.tips.REPORT.recent_precipitation}}"
+	   popover-trigger="mouseenter">      
       Recent precipitation:       &nbsp;&nbsp;
     </label>
-    <input ng-model="report.recent_precipitation" />
+    <input class="number" ng-model="report.recent_precipitation" />
   </div>  
 <div>
   <ng-include src="'templates/forms/chemical.html'"></ng-include>
@@ -52,6 +60,6 @@
 <br />
 <br />
 </div>
-<div class="col-md-4">
+<div class="col-md-4 pull-right" id="mapdiv">
 <leaflet defaults="defaults" markers="markers" center="center" height="480px" width="480px"></leaflet>
 </div>

@@ -17,6 +17,10 @@ app.factory('CommonsInterceptor', ['$rootScope', '$location', 'settings', functi
 app.config(['$routeProvider', '$httpProvider', '$locationProvider',
 	    function($routeProvider, $httpProvider, $locationProvider){
 		$routeProvider
+		    .when('/reports', {
+			controller: 'ReportsCtrl',
+			templateUrl: 'templates/view_reports.html'
+		    })
 		    .when('/report/new', {
 			controller: 'ReportCtrl',
 			templateUrl: 'templates/new_report.html'		    
@@ -29,6 +33,9 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider',
 			controller: 'LoginCtrl',
 			templateUrl: 'templates/login.html'
 		    })
+		    .when('/home', {
+			templateUrl: 'templates/home.html'
+		    })
 		    .when('/', {
 			templateUrl: 'templates/home.html'
 		    });
@@ -37,7 +44,19 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider',
 		delete $httpProvider.defaults.headers.common['X-Requested-With'];
 	    }]);
 
-app.run(['$rootScope', '$location', 'User', 'settings', function($rootScope, $location, User, settings){     
+app.run(['$rootScope', '$location', 'User', 'settings', 'tips', function($rootScope, $location, User, settings, tips){     
+    // bind tooltips, maybe a better way?
+    $rootScope.tips = tips;
+
+    $rootScope.isActive = function(path){
+	return $location.path() === path;
+    }
+
+    $rootScope.messages = [];
+    $rootScope.closeAlert = function(index){
+	$rootScope.messages  = $rootScope.messages.slice(index, 1);
+    };
+    
     if(window.localStorage.getItem(settings.ORG_NAME+'_auth') == null){
 	function getHash(url){
 	    var tuples = url
