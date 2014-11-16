@@ -71,14 +71,16 @@ app.factory('ChemicalReport', ['$resource', '$http', 'settings', 'Types', functi
 		     'water_color',		
 		     'water_odor'];
 
-	Object.keys(data).map(function(key){
-	    if(cr.keys.indexOf(key) >= 0){
-		cr[key] = data[key];	    
-	    }
-	    else{
-		cr[key] = data[key];
-	    }
-	});
+	if(data){
+	    Object.keys(data).map(function(key){
+		if(cr.keys.indexOf(key) >= 0){
+		    cr[key] = data[key];	    
+		}
+		else{
+		    cr[key] = data[key];
+		}
+	    });
+	}
     };
 
     CR.prototype.save = function() {

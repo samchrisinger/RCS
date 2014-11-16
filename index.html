@@ -78,7 +78,7 @@
     </div>        
   </div>
   <div id="content">
-    <alert ng-repeat="msg in $root.messages" type="{{msg.type}}">{{msg.msg}}</alert>
+    <alert ng-repeat="msg in $root.messages" type="{{msg.type}}" close="$root.closeMsg($index)">{{msg.msg}}</alert>
     <span ng-view></span>
   </div>
 </div>

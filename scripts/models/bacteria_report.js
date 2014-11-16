@@ -59,14 +59,16 @@ app.factory('BacteriaReport', ['$resource', '$http', 'settings', 'Types', functi
 		     "colonies_river_right",
 		     "river_flow"];
 
-	Object.keys(data).map(function(key){
-	    if(br.keys.indexOf(key) >= 0){
-		br[key] = data[key];
-	    }
-	    else {
-		br[key] = data[key];
-	    }
-	});	
+	if(data){
+	    Object.keys(data).map(function(key){
+		if(br.keys.indexOf(key) >= 0){
+		    br[key] = data[key];
+		}
+		else {
+		    br[key] = data[key];
+		}
+	    });	
+	}
     };
 
     BR.prototype.save = function() {

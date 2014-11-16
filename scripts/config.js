@@ -44,7 +44,7 @@ app.config(['$routeProvider', '$httpProvider', '$locationProvider',
 		delete $httpProvider.defaults.headers.common['X-Requested-With'];
 	    }]);
 
-app.run(['$rootScope', '$location', 'User', 'settings', 'tips', function($rootScope, $location, User, settings, tips){     
+app.run(['$rootScope', '$location', '$timeout', 'User', 'settings', 'tips', function($rootScope, $location, $timeout, User, settings, tips){     
     // bind tooltips, maybe a better way?
     $rootScope.tips = tips;
 
@@ -53,10 +53,19 @@ app.run(['$rootScope', '$location', 'User', 'settings', 'tips', function($rootSc
     }
 
     $rootScope.messages = [];
-    $rootScope.closeAlert = function(index){
-	$rootScope.messages  = $rootScope.messages.slice(index, 1);
+    $rootScope.closeMsg = function(index){
+	$rootScope.messages.splice(index, 1);
     };
+    /*
+    $rootScope.$watch('messages', function(oldval, newval){
+	var count = oldval.length = newval.length;
+	$timeout(function(){
+	    $rootScope.messages  = $rootScope.messages.slice(0, count);
+	}, 3000);
+    });
+    */
     
+
     if(window.localStorage.getItem(settings.ORG_NAME+'_auth') == null){
 	function getHash(url){
 	    var tuples = url
@@ -82,7 +91,7 @@ app.run(['$rootScope', '$location', 'User', 'settings', 'tips', function($rootSc
 		 $rootScope.user = res.response;
 	     },
 	     function(res){
-		 if (res.status === 403){
+		 if (res.status === 403 || res.status === 0){
 		     window.localStorage.removeItem(settings.ORG_NAME+'_auth');
 		     window.location.href = "#sign_in";
 		 }
